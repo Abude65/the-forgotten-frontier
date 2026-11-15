@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Forgotten Frontier</title>
+<style>
+:root{--bg:#060b18;--bg2:#0c1530;--tx:#e8edf7;--mu:#8e9bb8;--bl:#6ea8ff;--or:#e8833a;--ln:#1e2b4d;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root:not([data-theme="light"]){color-scheme:dark}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:56px}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.6 Georgia,'Times New Roman',serif}
+h1,h2,h3,.sans,button,nav,.tag{font-family:system-ui,-apple-system,'Segoe UI',sans-serif}
+a{color:var(--bl)}
+nav{position:sticky;top:0;z-index:5;display:flex;gap:16px;align-items:center;padding:12px 18px;background:rgba(6,11,24,.92);border-bottom:1px solid var(--ln);overflow-x:auto;white-space:nowrap;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+nav b{color:var(--or);margin-right:auto}nav a{color:var(--mu);text-decoration:none}
+section{max-width:960px;margin:0 auto;padding:56px 18px}
+.hero{min-height:88vh;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;max-width:none;background:radial-gradient(circle at 80% 20%,#16264f 0,transparent 45%),var(--bg)}
+.hero>div{max-width:960px;margin:0 auto;width:100%;position:relative;z-index:1}
+.stars{position:absolute;inset:0;opacity:.7}
+.eyebrow{color:var(--or);letter-spacing:.2em;font-size:12px;text-transform:uppercase}
+h1{font-size:clamp(34px,8vw,68px);line-height:1.05;margin:.3em 0;font-weight:600}
+h2{font-size:clamp(24px,5vw,36px);margin:0 0 .4em;font-weight:600}
+.lead{color:var(--mu);max-width:560px;font-size:18px}
+.orbs{display:flex;gap:14px;margin:26px 0;flex-wrap:wrap}
+.orb{display:flex;align-items:center;gap:12px;padding:10px 18px 10px 10px;border:1px solid var(--ln);border-radius:40px;background:var(--bg2);color:var(--tx);cursor:pointer;font-size:14px;letter-spacing:.1em}
+.orb i{width:34px;height:34px;border-radius:50%;display:block}
+.moon i{background:radial-gradient(circle at 35% 30%,#d8dbe2,#777c8a 70%)}.mars i{background:radial-gradient(circle at 35% 30%,#e89061,#8c3a1c 75%)}
+.btn{background:var(--or);color:#1a0d02;border:0;padding:14px 28px;border-radius:3px;font-weight:700;letter-spacing:.08em;font-size:14px;cursor:pointer;text-decoration:none;display:inline-block}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.chip{border:1px solid var(--ln);background:transparent;color:var(--mu);padding:7px 14px;border-radius:20px;font-size:13px;cursor:pointer}
+.chip.on{background:var(--bl);color:#04122b;border-color:var(--bl)}
+input[type=search]{width:100%;padding:12px 14px;background:var(--bg2);border:1px solid var(--ln);color:var(--tx);border-radius:3px;font-size:16px}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));margin-top:16px}
+.item{text-align:left;border:1px solid var(--ln);background:linear-gradient(160deg,var(--bg2),var(--bg));padding:18px;border-radius:3px;color:var(--tx);cursor:pointer}
+.item:hover{border-color:var(--bl)}.item h3{margin:6px 0;font-size:18px}.item p{margin:0;color:var(--mu);font-size:14px}
+.tag{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--or)}
+#profile{background:var(--bg2);border-top:1px solid var(--ln);border-bottom:1px solid var(--ln);max-width:none}
+#profile>div{max-width:960px;margin:0 auto}
+.meta{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));margin:18px 0}
+.meta div{border-left:2px solid var(--or);padding-left:10px;font-size:14px}.meta span{display:block;color:var(--mu);font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-family:system-ui}
+.steps{display:flex;overflow-x:auto;gap:4px;margin:22px 0 10px;border-bottom:1px solid var(--ln)}
+.step{flex:1;min-width:110px;background:none;border:0;border-bottom:3px solid transparent;color:var(--mu);padding:10px 4px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+.step.on{color:var(--tx);border-color:var(--or)}
+.panel{min-height:110px;font-size:17px;max-width:680px}
+.fx{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:22px}
+.fx div{padding:14px;border:1px solid var(--ln);font-size:14px}.fx b{display:block;font-family:system-ui;font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+.c b{color:#6fd39a}.i b{color:var(--bl)}.u b{color:var(--or)}
+.ill{border:1px dashed var(--ln);padding:12px;margin:18px 0;color:var(--mu);font-size:14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.sci{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}.sci div{border-top:2px solid var(--bl);padding-top:10px}.sci h3{margin:0 0 4px;font-size:16px}.sci p{margin:0;color:var(--mu);font-size:15px}
+table{width:100%;border-collapse:collapse;font-size:14px}td,th{border-bottom:1px solid var(--ln);padding:10px 6px;text-align:left;vertical-align:top}th{color:var(--or);font-family:system-ui;font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.wrap{overflow-x:auto}
+.dyk{border:1px solid var(--or);padding:20px;margin-top:20px}.dyk p{font-size:18px;margin:8px 0 14px}
+footer{padding:30px 18px;text-align:center;color:var(--mu);font-size:13px;border-top:1px solid var(--ln)}
+li{margin:6px 0}
+
+.mission-figure{margin:18px 0 22px;border:1px solid var(--ln);background:#081126;padding:10px;border-radius:4px}
+.mission-figure img{display:block;width:100%;max-height:390px;object-fit:contain;background:#02050c;border-radius:3px}
+.mission-figure figcaption{color:var(--mu);font:13px/1.5 system-ui,sans-serif;padding:9px 2px 2px}
+.mission-figure figcaption a{margin-left:6px}
+.item .thumb{display:block;width:100%;height:135px;object-fit:cover;background:#02050c;margin:-2px 0 12px;border-radius:2px}
+[dir=rtl] *{letter-spacing:0!important;text-transform:none!important}[dir=rtl] body{font-family:'Segoe UI',Tahoma,'Noto Naskh Arabic',sans-serif}[dir=rtl] .meta div{border-left:0;border-right:2px solid var(--or);padding-left:0;padding-right:10px}[dir=rtl] nav b{margin-right:0;margin-left:auto}[dir=rtl] td,[dir=rtl] th{text-align:right}
+</style></head><body>
+<nav><b>THE FORGOTTEN FRONTIER</b><button class='chip' id='lg' onclick='setLang()' style='flex:none'>العربية</button><a href="#explore">Explore</a><a href="#story">Story</a><a href="#machines">Machines</a><a href="#map">Map</a><a href="#inv">Investigate</a><a href="#quiz">Challenge</a><a href="#science">Science</a><a href="#learn">Learn</a><a href="#cmp">Compare</a><a href="#legacy">Legacy</a><a href="#refs">Sources</a></nav>
+<noscript><div style="padding:14px 18px;background:#e8833a;color:#1a0d02;font:15px system-ui,sans-serif">This page needs JavaScript. Please open it in Chrome, Safari or Firefox (not a file preview).</div></noscript>
+
+
+<section class="hero"><canvas class="stars" id="st"></canvas><div>
+<div class="eyebrow">An interactive archive · NASA Space Apps 2026 · Team AKYRA</div>
+<h1>Every Mission<br>Leaves Something Behind.</h1>
+<p class="lead">Spacecraft that landed on the Moon and Mars did not vanish when their missions ended. Open the archive and investigate what was left, what was brought home, and what it taught us.</p>
+<div class="orbs"><button class="orb moon" onclick="go('Moon')"><i></i>THE MOON</button><button class="orb mars" onclick="go('Mars')"><i></i>MARS</button></div>
+<a class="btn" href="#explore">START EXPLORING</a>
+<p class="sans" style="margin-top:34px;color:var(--mu);font-size:13px">“When a space mission ends, its story does not have to end with it.”</p>
+</div></section>
+
+<section id="explore">
+<div class="eyebrow">The archive · 9 documented objects</div><h2>Explore What We Left Behind</h2>
+<input type="search" id="q" placeholder="Search objects, missions, places…" oninput="draw()" aria-label="Search">
+<div class="chips" id="fd"></div><div class="chips" id="fs"></div>
+<div class="grid" id="g"></div>
+<p class="sans" style="color:var(--mu);font-size:13px">No map is shown. Only landing regions that NASA names are given; no coordinates are displayed because none are verified in this dataset.</p>
+</section>
+
+<section id="profile" hidden><div id="pr"></div></section>
+
+<section id='machines'><div class='eyebrow'>Meet the machines</div><h2>The hardware behind the missions</h2><p class='lead' style='font-size:16px'>A lander touches down and stays put. A rover is a robotic vehicle that drives across another world to study its rocks, soil and surroundings.</p><div class='chips' id='mm'></div><div id='mx'></div><details><summary>Words to know</summary><ul><li><b>Sol:</b> a Martian day, a little longer than an Earth day.</li><li><b>Spectrometer:</b> an instrument that reads the light from a material to learn what it is made of.</li><li><b>APXS:</b> a spectrometer that measures the chemical elements in rocks and soil.</li><li><b>RTG:</b> a power source that turns heat from radioactive material into electricity.</li><li><b>Seismometer:</b> an instrument that measures ground shaking.</li></ul></details></section>
+<section id='story'><div class='eyebrow'>The story</div><h2>Six chapters</h2><div class='steps' id='chS'></div><div class='panel' id='chP'></div></section>
+<section id="science">
+<div class="eyebrow">The science behind what remains</div><h2>Why old hardware still matters</h2>
+<div class="sci">
+<div><h3>Temperature extremes</h3><p>Both worlds swing through very large day–night temperature changes, which stress metals, adhesives and electronics. Surveyor 3’s parts were returned in 1969 partly so engineers could examine such effects.</p></div>
+<div><h3>Radiation</h3><p>Neither the Moon nor Mars has a protective global magnetic field like Earth’s, and Mars has only a thin atmosphere, so surfaces receive far more radiation than Earth’s.</p></div>
+<div><h3>Dust</h3><p>Dust coated Surveyor 3 and later clung to Apollo gear. On Mars, dust built up on rover solar panels; wind cleaning events extended Spirit and Opportunity’s lives, while the 2018 global dust storm preceded Opportunity’s last contact.</p></div>
+<div><h3>Material degradation</h3><p>Exposed polymers, coatings and wiring age differently in vacuum, UV and thermal cycling. Returned Surveyor 3 pieces are among the few spacecraft materials examined after time on another world.</p></div>
+</div>
+<p class="sans" style="color:var(--mu);font-size:13px;margin-top:16px">Exact figures vary by site and season; see the NASA sources in each profile and the reference list before quoting numbers.</p>
+</section>
+
+<section id="learn">
+<div class="eyebrow">Educational</div><h2>Moon vs Mars</h2>
+<div class="wrap"><table>
+<tr><th></th><th>Moon (this archive)</th><th>Mars (this archive)</th></tr>
+<tr><td>Journey</td><td>Days</td><td>About half a year or more</td></tr>
+<tr><td>Crews</td><td>Humans walked at Apollo sites</td><td>Robots only</td></tr>
+<tr><td>Hardware left</td><td>Landers, instruments, tools</td><td>Landers and rovers</td></tr>
+<tr><td>Ended by</td><td>Planned departures, lunar night</td><td>Sand, dust, lost contact</td></tr>
+</table></div>
+<h2 style="margin-top:36px">How earlier missions helped</h2>
+<ul><li>Surveyor landers demonstrated soft landing and surface survey before crewed Apollo landings.</li><li>Sojourner showed that wheeled rovers can work on Mars.</li><li>Spirit and Opportunity showed rovers can far outlast their planned lifetimes and find evidence of past water.</li></ul>
+<div class="dyk"><div class="tag">Did you know?</div><p id="dp"></p><button class="chip" onclick="nd()">Another fact</button></div>
+</section>
+
+<section id="cmp"><div class="eyebrow">Compare</div><h2>Two objects, side by side</h2><div class="chips"><select id="c1" onchange="cmp()" style="padding:8px;background:var(--bg2);color:var(--tx);border:1px solid var(--ln)"></select><select id="c2" onchange="cmp()" style="padding:8px;background:var(--bg2);color:var(--tx);border:1px solid var(--ln)"></select></div><div class="wrap" id="ct"></div></section>
+<section id='map'><div class='eyebrow'>Where we left them</div><h2>Landing regions</h2><div class='chips' id='mb'></div><div class='grid' id='mg'></div><p class='sans' style='color:var(--mu);font-size:13px'>Regions are the places NASA names for each landing. No coordinates are shown because none are verified here, and this is not a scale map. Tap an object to open its profile.</p></section>
+<section id='inv'><div class='eyebrow'>Mission investigation</div><h2>Mission Case Files</h2><div class='chips' id='cft'></div><div class='steps' id='ivS'></div><div class='panel' id='ivP'></div><div id='ivX'></div></section>
+<section id='quiz'><div class='eyebrow'>Challenge</div><h2>Test Your Space Knowledge</h2><div id='qz'></div></section>
+<section id='legacy'><div class='eyebrow'>Legacy</div><h2>What these machines taught humanity</h2><div class='sci'><div><h3>Lunar exploration</h3><p>Surveyor landers tested soft landings and the surface before Apollo crews went.</p></div><div><h3>Robotic exploration</h3><p>Sojourner showed a rover could drive on Mars; Spirit and Opportunity then worked far beyond their plans.</p></div><div><h3>Planetary geology</h3><p>Rovers read the history of a place from its rocks and minerals.</p></div><div><h3>Past water</h3><p>Spirit and Opportunity found evidence of water-related environments on ancient Mars.</p></div><div><h3>Engineering</h3><p>Dust, cold and power shortages shaped how later spacecraft were designed.</p></div><div><h3>Later missions</h3><p>The airbag landing system proven by Pathfinder was used again by Spirit and Opportunity.</p></div></div></section>
+<section id='next'><div class='eyebrow'>The next generation of explorers</div><h2>What the machines left us</h2><p>Surveyor 3 parts brought home in 1969 let engineers study how hardware ages on the Moon. Rovers that outlasted their plans, and a mission that ended in dust, show how dust, power and long operation shape spacecraft design. Leaving equipment on other worlds also raises a question of responsibility: these sites are part of human history, and how to protect them is an open discussion.</p><p style='font-size:20px;color:var(--or)'>We left machines behind. They left knowledge for us.</p></section>
+<section id="refs">
+<div class="eyebrow">References and data sources</div><h2>Where the facts come from</h2>
+<ul>
+<li><a href="https://images.nasa.gov/" target="_blank" rel="noopener">NASA Image and Video Library</a> (official photographs)</li>
+<li><a href="https://science.nasa.gov/" target="_blank" rel="noopener">NASA Science</a></li>
+<li><a href="https://ntrs.nasa.gov/" target="_blank" rel="noopener">NASA Technical Reports Server</a></li>
+<li><a href="https://nssdc.gsfc.nasa.gov/" target="_blank" rel="noopener">NASA NSSDCA Master Catalog</a></li>
+</ul>
+<p>Per-object links are in each profile. <b>Limitation:</b> selected NASA-hosted photographs are embedded in the archive with captions and credits. Some images show a landing site or a view captured by the spacecraft rather than a portrait of the hardware itself; captions identify what each image actually depicts. Dates reflect NASA records as recalled by the author and must be checked against the linked sources before submission.</p>
+</section>
+<footer>The Forgotten Frontier · Team AKYRA · Explore What We Left Behind.</footer>
+
+<script>
+window.addEventListener('error',function(ev){var d=document.createElement('div');d.style.cssText='padding:14px 18px;background:#e8833a;color:#1a0d02;font:14px system-ui,sans-serif';d.textContent='Page error: '+ev.message;document.body.insertBefore(d,document.body.firstChild)});
+const D=[
+{id:"s3",n:"Surveyor 3",m:"Surveyor program",d:"Moon",s:"Partly recovered",l:"April 17, 1967",a:"April 20, 1967",loc:"Oceanus Procellarum (Ocean of Storms)",p:"Test soft landing and photograph and sample the surface ahead of Apollo.",
+t:["Launched on an Atlas-Centaur rocket toward the Moon.","A flight of about three days.","Landed in a crater; touchdown was rough, with the spacecraft bouncing on the surface before settling.","Returned thousands of TV images and used its scoop to test soil mechanics.","Fell silent after lunar sunset in early May 1967; attempts to revive it did not succeed.","Apollo 12 astronauts visited it on Nov 20, 1969. They cut off the TV camera, scoop, and pieces of cable and tubing and brought them to Earth. The rest of the spacecraft stays on the Moon."],
+c:"Apollo 12 crew recovered the camera, scoop and cable/tubing pieces; the remaining spacecraft was left on the Moon.",i:"Returned parts were studied for exposure effects. A claim that bacteria survived on the camera was later widely questioned as likely contamination.",u:"Exact total image count and final contact details should be checked against NSSDCA.",
+r:[["NSSDCA: Surveyor 3","https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1967-035A"],["NASA images: Surveyor 3","https://images.nasa.gov/search?q=Surveyor%203"],["NTRS: Surveyor 3","https://ntrs.nasa.gov/search?q=Surveyor%203"]]},
+{id:"a11",n:"Apollo 11 Lunar Module (descent stage)",m:"Apollo 11",d:"Moon",s:"Remains on surface",l:"July 16, 1969",a:"July 20, 1969",loc:"Mare Tranquillitatis (Sea of Tranquility)",p:"Carry two astronauts to the surface and serve as the launch pad for their return.",
+t:["Launched on a Saturn V.","About four days to the Moon.","The LM Eagle landed at Tranquility Base.","First crewed Moon landing; the crew collected lunar samples and deployed experiments.","The ascent stage lifted off July 21, 1969; the descent stage stayed as its launch platform.","The descent stage remains at the site. NASA’s Lunar Reconnaissance Orbiter has imaged Apollo landing sites."],
+c:"The descent stage was left on the surface.",i:"Astronaut accounts suggest the flag was disturbed by the ascent engine exhaust.",u:"The jettisoned ascent stage’s fate is not confirmed.",
+r:[["NSSDCA: Apollo 11 LM","https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C"],["NASA images: Apollo 11","https://images.nasa.gov/search?q=Apollo%2011%20lunar%20module"],["NTRS: Apollo 11","https://ntrs.nasa.gov/search?q=Apollo%2011"]]},
+{id:"a12",n:"Apollo 12 Lunar Module (descent stage)",m:"Apollo 12",d:"Moon",s:"Remains on surface",l:"November 14, 1969",a:"November 19, 1969",loc:"Oceanus Procellarum, near Surveyor 3",p:"Land two astronauts near Surveyor 3 and support a surface science stay.",
+t:["Launched on a Saturn V.","About four days to the Moon.","The LM Intrepid made a precision landing within walking distance of Surveyor 3.","Crew deployed an instrument package and visited Surveyor 3.","The ascent stage was deliberately crashed onto the Moon after the crew left, and a seismometer recorded it.","The descent stage and surface instruments remain at the site."],
+c:"Landing near Surveyor 3 and the 1969 visit to it are documented.",i:"The deliberate impact helped scientists study the Moon’s interior.",u:"Check NASA sources for the current status of instruments.",
+r:[["NSSDCA: Apollo 12 LM","https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C"],["NASA images: Apollo 12","https://images.nasa.gov/search?q=Apollo%2012%20Surveyor"],["NTRS: Apollo 12","https://ntrs.nasa.gov/search?q=Apollo%2012"]]},
+{id:"pf",n:"Mars Pathfinder lander",m:"Mars Pathfinder",d:"Mars",s:"Mission ended",l:"December 4, 1996",a:"July 4, 1997",loc:"Ares Vallis",p:"Demonstrate low-cost entry, landing and surface operations, and carry Sojourner.",
+t:["Launched toward Mars.","A cruise of about seven months.","Landed using a parachute and airbags.","Returned images and weather data and supported Sojourner’s work.","The final data transmission arrived on September 27, 1997; NASA formally terminated the mission on March 10, 1998 after recovery efforts.","The lander remains at the landing site, renamed the Carl Sagan Memorial Station."],
+c:"Landing date and final transmission are NASA records.",i:"It proved a low-cost landing approach later reused in concept.",u:"Verify details on lander condition from orbital images.",
+r:[["NSSDCA: Pathfinder","https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1996-068A"],["NASA images: Pathfinder","https://images.nasa.gov/search?q=Mars%20Pathfinder"],["NTRS: Pathfinder","https://ntrs.nasa.gov/search?q=Mars%20Pathfinder"]]},
+{id:"sj",n:"Sojourner rover",m:"Mars Pathfinder",d:"Mars",s:"Mission ended",l:"December 4, 1996",a:"July 4, 1997",loc:"Ares Vallis",p:"First wheeled rover on Mars; test mobility and analyze rocks.",
+t:["Launched folded inside Pathfinder.","Cruised with the lander.","Rolled onto the surface after landing.","Used an alpha proton X-ray spectrometer on rocks and soil.","The final data transmission arrived on September 27, 1997; NASA formally terminated the mission on March 10, 1998 after recovery efforts.","Presumed to remain near the lander."],
+c:"It operated far longer than its planned week.",i:"Its success supported later rover designs.",u:"Exact resting place needs orbital confirmation.",
+r:[["NASA images: Sojourner","https://images.nasa.gov/search?q=Sojourner%20rover"],["NTRS: Sojourner","https://ntrs.nasa.gov/search?q=Sojourner"],["NASA Science","https://science.nasa.gov/"]]},
+{id:"sp",n:"Spirit rover",m:"Mars Exploration Rover",d:"Mars",s:"Mission ended",l:"June 10, 2003",a:"January 4, 2004",loc:"Gusev Crater",p:"Search for evidence of past water.",
+t:["Launched toward Mars.","Cruise of about seven months.","Landed in Gusev Crater.","Found evidence of past water-altered, silica-rich deposits.","Stuck in soft sand in 2009; last contact March 22, 2010; NASA ended recovery efforts May 25, 2011.","The rover remains where it stopped."],
+c:"Stuck in 2009; last contact in 2010.",i:"Silica deposits suggest a past watery environment.",u:"Check NASA for the current appearance of the site.",
+r:[["NSSDCA: Spirit","https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2003-027A"],["NASA images: Spirit","https://images.nasa.gov/search?q=Spirit%20rover"],["NTRS: Spirit","https://ntrs.nasa.gov/search?q=Spirit%20rover"]]},
+{id:"op",n:"Opportunity rover",m:"Mars Exploration Rover",d:"Mars",s:"Mission ended",l:"July 7, 2003",a:"January 25, 2004",loc:"Meridiani Planum",p:"Search for evidence of past water. Planned to last 90 sols.",
+t:["Launched toward Mars.","A cruise of roughly six months.","Landed at Meridiani Planum.","Found evidence of past liquid water.","Last contact June 10, 2018 during a global dust storm; mission declared complete Feb 13, 2019.","The rover remains on Mars, last known at Perseverance Valley."],
+c:"Last contact and mission end dates are NASA records.",i:"Evidence of past water is a scientific interpretation.",u:"The rover’s current condition is unknown.",
+r:[["NSSDCA: Opportunity","https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2003-032A"],["NASA images: Opportunity","https://images.nasa.gov/search?q=Opportunity%20rover"],["NTRS: Opportunity","https://ntrs.nasa.gov/search?q=Opportunity%20rover"]]},
+{id:"s1",n:"Surveyor 1",m:"Surveyor program",d:"Moon",s:"Remains on surface",l:"May 30, 1966",a:"June 2, 1966",loc:"Oceanus Procellarum (Ocean of Storms)",p:"First US soft landing on the Moon; test the landing system and photograph the surface.",t:["Launched on an Atlas-Centaur rocket.","A flight of about three days.","Soft-landed on the Moon.","Returned more than 11,000 images of the surface.","Contact ended in early 1967 (check NSSDCA for the exact date).","The whole spacecraft remains on the Moon."],c:"It was the first US soft landing on the Moon.",i:"Its images helped confirm the surface could support a lander.",u:"Exact image count and final contact date: verify.",r:[["NSSDCA: Surveyor 1","https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1966-045A"],["NASA images: Surveyor 1","https://images.nasa.gov/search?q=Surveyor%201"],["NTRS: Surveyor 1","https://ntrs.nasa.gov/search?q=Surveyor%201"]]},
+{id:"vk",n:"Viking 1 lander",m:"Viking",d:"Mars",s:"Mission ended",l:"August 20, 1975",a:"July 20, 1976",loc:"Chryse Planitia",p:"Photograph Mars and test the soil for signs of life.",t:["Launched toward Mars together with an orbiter.","A cruise of nearly a year.","Landed in Chryse Planitia.","Returned surface images and weather data and ran biology experiments.","Contact was lost on November 11, 1982.","The lander remains on Mars, renamed the Thomas Mutch Memorial Station."],c:"Landing date and the end of contact are NASA records.",i:"The biology experiments did not give a clear sign of life; their meaning has been debated.",u:"Verify details of the 1982 loss of contact.",r:[["NASA images: Viking 1","https://images.nasa.gov/search?q=Viking%201%20lander"],["NTRS: Viking 1","https://ntrs.nasa.gov/search?q=Viking%201%20lander"],["NASA Science","https://science.nasa.gov/"]]}
+];
+const PHOTOS = {"s3":{"src":"https://assets.science.nasa.gov/dynamicimage/assets/science/psd/lunar-science/2023/09/as12-48-7121_orig.jpg","caption":"Surveyor 3 on the lunar surface during Apollo 12; the Lunar Module is visible in the background.","credit":"NASA/JSC","source":"https://science.nasa.gov/resource/view-of-surveyor-iii-in-its-crater/","alt":"Surveyor 3 photographed on the Moon during Apollo 12"},"a11":{"src":"https://assets.science.nasa.gov/dynamicimage/assets/science/psd/lunar-science/2023/09/as11-40-5927_orig.jpg","caption":"Apollo 11 surface activity near the Lunar Module at Tranquility Base.","credit":"NASA/JSC","source":"https://science.nasa.gov/resource/view-apollo-11-lunar-module-as-it-rested-on-lunar-surface/","alt":"Apollo 11 Lunar Module on the Moon"},"a12":{"src":"https://assets.science.nasa.gov/dynamicimage/assets/science/psd/lunar-science/2023/09/as12-48-7121_orig.jpg","caption":"Apollo 12 landed near Surveyor 3; this photograph documents the historic visit and hardware recovery.","credit":"NASA","source":"https://science.nasa.gov/resource/apollo-12-and-surveyor-3/","alt":"Apollo 12 Lunar Module and Surveyor 3 on the Moon"},"pf":{"src":"https://assets.science.nasa.gov/dynamicimage/assets/science/psd/mars/downloadable_items/3/9/39968_PIA01124.jpg","caption":"A NASA mosaic showing the Mars Pathfinder landing area and nearby surface features. This is a landing-site view, not a close-up of the lander.","credit":"NASA/JPL","source":"https://science.nasa.gov/resource/mars-pathfinder-landing-site/","alt":"Mars Pathfinder landing-site mosaic"},"sj":{"src":"https://assets.science.nasa.gov/dynamicimage/assets/science/psd/mars/downloadable_items/3/9/39771_PIA00631.jpg","caption":"Sojourner on its first Martian day, still attached to a Pathfinder lander petal.","credit":"NASA/JPL","source":"https://science.nasa.gov/resource/sojourner-terrain/","alt":"Sojourner rover on Mars"},"sp":{"src":"https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia04/pia04980/PIA04980.jpg","caption":"A 360-degree panoramic view made by Spirit's navigation camera after landing on Mars.","credit":"NASA/JPL","source":"https://science.nasa.gov/photojournal/first-look-at-spirit-on-mars/","alt":"Panorama captured by Spirit on Mars"},"op":{"src":"https://assets.science.nasa.gov/dynamicimage/assets/science/psd/mars/downloadable_items/3/37447_Sol322B_DeckPan_crop-PIA07372.jpg","caption":"Opportunity's self-portrait, showing the rover deck and solar panels.","credit":"NASA/JPL-Caltech/Cornell","source":"https://science.nasa.gov/resource/opportunity-self-portrait/","alt":"Opportunity rover self-portrait"},"s1":{"src":"https://assets.science.nasa.gov/dynamicimage/assets/science/psd/lunar-science/2023/09/PIA02976.jpg","caption":"Surveyor 1's shadow on the Moon. This image shows its shadow, not a full view of the spacecraft.","credit":"NASA","source":"https://science.nasa.gov/resource/surveyor-1-shadow/","alt":"Surveyor 1's shadow on the lunar surface"},"vk":{"src":"https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia00/pia00381/PIA00381.jpg","caption":"The first photograph taken on Mars by Viking 1 shortly after landing; the view includes nearby soil, rocks, and part of a footpad.","credit":"NASA/JPL","source":"https://science.nasa.gov/photojournal/first-photograph-taken-on-mars-surface/","alt":"First photograph taken on Mars by Viking 1"}};
+const SN=["Launch","Journey","Landing","Discoveries","Mission end","What remains"];
+const F=["Dust","Moon: Surveyor 3","Apollo"].length;
+let dst="All",sts="All",cur=null,stp=0;
+const dyk=["Opportunity was planned for 90 sols and operated for more than 50 times that.","Apollo 12 landed within walking distance of Surveyor 3.","Sojourner was the first wheeled rover to operate on Mars.","Only parts of Surveyor 3 came home; the rest of it is still on the Moon."];
+let di=0;
+function nd(){di=(di+1)%dyk.length;dp.textContent=dyk[di]}
+function chips(el,arr,get,set){el.innerHTML=arr.map(v=>`<button class="chip ${get()==v?'on':''}" onclick="${set}('${v}')">${v}</button>`).join("")}
+function setD(v){dst=v;draw()}function setS(v){sts=v;draw()}
+function go(d){dst=d;draw();document.getElementById("explore").scrollIntoView()}
+function draw(){
+chips(fd,["All","Moon","Mars"],()=>dst,"setD");
+chips(fs,["All","Remains on surface","Partly recovered","Mission ended"],()=>sts,"setS");
+const k=q.value.toLowerCase();
+const r=D.filter(o=>(dst=="All"||o.d==dst)&&(sts=="All"||o.s==sts)&&(o.n+o.m+o.loc+o.p).toLowerCase().includes(k));
+g.innerHTML=r.map(o=>`<button class="item" onclick="open_('${o.id}')">${PHOTOS[o.id]?`<img class="thumb" src="${PHOTOS[o.id].src}" alt="${PHOTOS[o.id].alt}" loading="lazy" referrerpolicy="no-referrer" onerror="imgFail(this)">`:``}<div class="tag">${o.d} · ${o.s}</div><h3>${o.n}</h3><p>${o.m}</p></button>`).join("")||"<p>No objects match.</p>";
+}
+function open_(id){cur=D.find(o=>o.id==id);stp=0;prof();profile.hidden=false;profile.scrollIntoView()}
+function sp_(i){stp=i;prof()}
+
+function imgFail(el){if(el.classList.contains('thumb')){el.remove();return}const a=el.closest('a');if(a)a.outerHTML='<div class="ill">The photograph could not be loaded here. Use the NASA image source link below.</div>'}
+function photoMarkup(o){
+ const p=PHOTOS[o.id];
+ if(!p) return '';
+ return `<figure class="mission-figure">
+   <a href="${p.source}" target="_blank" rel="noopener" aria-label="Open NASA source for ${o.n}">
+     <img src="${p.src}" alt="${p.alt}" loading="lazy" referrerpolicy="no-referrer" onerror="imgFail(this)">
+   </a>
+   <figcaption>${p.caption} <span>Credit: ${p.credit}.</span>
+   <a href="${p.source}" target="_blank" rel="noopener">NASA image source</a></figcaption>
+ </figure>`;
+}
+
+function prof(){const o=cur;
+const body=[`Launched ${o.l}. ${o.t[0]}`,o.t[1],`Landing: ${o.a}. ${o.t[2]}`,o.t[3],o.t[4],o.t[5]];
+pr.innerHTML=`<div class="tag">${o.d} · ${o.m}</div><h2>${o.n}</h2>
+<div class="meta"><div><span>Launch</span>${o.l}</div><div><span>Landing</span>${o.a}</div><div><span>Region (NASA-named)</span>${o.loc}</div><div><span>Status</span>${o.s}</div></div>
+<p><b>Original purpose:</b> ${o.p}</p>
+${photoMarkup(o)}
+<div class="steps">${SN.map((s,i)=>`<button class="step ${i==stp?'on':''}" onclick="sp_(${i})">${i+1}. ${s}</button>`).join("")}</div>
+<div class="panel">${body[stp]}</div>
+<div class="fx"><div class="c"><b>Confirmed</b>${o.c}</div><div class="i"><b>Interpretation</b>${o.i}</div><div class="u"><b>Unknown / verify</b>${o.u}</div></div>
+${hwb(o)}<div class="ill"><a href="${(o.r.find(x=>x[0].startsWith('NASA images'))||o.r[0])[1]}" target="_blank" rel="noopener">Browse official NASA photographs</a></div>
+<p><b>Sources:</b></p><ul>${o.r.map(x=>`<li><a href="${x[1]}" target="_blank" rel="noopener">${x[0]}</a></li>`).join("")}</ul>
+<button class="chip" onclick="profile.hidden=true;document.getElementById('explore').scrollIntoView()">Close profile</button>`}
+const CH=[['The Beginning','Before people went to the Moon, robots went first. Surveyor landers tested soft landings and surveyed the surface ahead of Apollo. Mars is far away, so machines went there first too.'],['The Mission','Each machine had a job: photograph the surface, test the soil, analyze rocks, search for signs of past water or life. Every profile lists its original purpose.'],['The Unexpected','Surveyor 3 bounced on landing. Spirit became stuck in soft sand. A global dust storm struck Opportunity in 2018.'],['The End','Missions ended in different ways: lost contact, sand traps, dust, or a planned departure. Each profile gives its own ending.'],['What Remains','Apollo descent stages, Surveyor spacecraft, landers and rovers remain where they stopped. Only parts of Surveyor 3 came home.'],['The Legacy','Surveyor, Viking, Pathfinder and the rovers tested landing, mobility and long-term operation, which later missions built on.']];
+function chp(i){chS.innerHTML=CH.map((c,j)=>`<button class='step ${j==i?'on':''}' onclick='chp(${j})'>${j+1}. ${c[0]}</button>`).join('');chP.textContent=CH[i][1]}
+const MP=[['Moon',[['Oceanus Procellarum (Ocean of Storms)',['s1','s3','a12']],['Mare Tranquillitatis (Sea of Tranquility)',['a11']]]],['Mars',[['Ares Vallis',['pf','sj']],['Gusev Crater',['sp']],['Meridiani Planum',['op']],['Chryse Planitia',['vk']]]]];
+function oi(id){open_(id)}
+function mp(k){mb.innerHTML=MP.map((m,j)=>`<button class='chip ${j==k?'on':''}' onclick='mp(${j})'>${m[0]}</button>`).join('');mg.innerHTML=MP[k][1].map(r=>`<div class='item' style='cursor:default'><div class='tag'>Regional location</div><h3>${r[0]}</h3>`+r[1].map(id=>`<button class='chip' onclick='oi(&quot;${id}&quot;)'>${D.find(x=>x.id==id).n}</button>`).join(' ')+`</div>`).join('')}
+const CON='The documented evidence shows the 2018 global dust storm came just before the last contact on June 10, 2018. NASA records do not establish the exact cause of the silence.';
+const IV=[['Objective','Opportunity landed on January 25, 2004 to look for evidence of past water. It was planned to work for about 90 sols.','Landing date and the 90-sol plan are NASA records.','',''],['Discoveries','It found evidence of past liquid water at Meridiani Planum.','NASA reported these findings.','Evidence points to a past watery environment.','How long water lasted: verify.'],['Difficulties','The rover kept working for about 14 years, far beyond its plan.','It operated far longer than planned.','','Specific faults over the years: verify in NASA updates.'],['Dust storm','In mid-2018 a global dust storm blocked sunlight, cutting the solar power the rover relies on.','A global dust storm occurred in 2018.','Low power is the leading explanation for the silence.','Whether the rover was working in any state afterward.'],['Final contact','The last communication was on June 10, 2018.','The date is a NASA record.','','The rover final state.'],['NASA decision','After repeated attempts to hear from it, NASA declared the mission complete on February 13, 2019.','The date is a NASA record.','','Total number of recovery attempts: verify.'],['What remains','The rover remains on Mars, last known in Perseverance Valley.','It was not recovered.','','Its present condition, including dust cover.'],['Legacy','It showed rovers can far outlast their plans and added to evidence that Mars once had liquid water.','About 14 years of operation.','Added to understanding of past water on Mars.','']];
+const IV3=[['Why NASA sent it','Surveyor 3 was sent to test a soft landing on the Moon and to study the surface ahead of Apollo.','Surveyor was a program that came before the Apollo landings.','',''],['What it did','It landed April 20, 1967, sent back thousands of images and used its scoop to dig trenches and test the soil.','Landing date, images and scoop tests are NASA records.','The soil seemed able to support a lander.','Exact image count: verify.'],['Why it stopped','It went silent as the lunar night began in early May 1967. The solar-powered spacecraft could not make power in the dark and cold.','Contact ended after lunar sunset and revival attempts did not work.','Cold and lack of sunlight are the likely reasons.','Exact final contact date: verify.'],['Why Apollo 12 visited','Apollo 12 landed near Surveyor 3, and the crew visited it on November 20, 1969.','The landing near Surveyor 3 and the visit are NASA records.','Engineers wanted to see how the hardware had aged.','Exact distance from the lander: verify.'],['What came home','The crew removed the TV camera, the scoop and pieces of cable and tubing.','These items were returned to Earth. The rest stayed on the Moon.','','Complete list of returned parts: verify.'],['What scientists learned','Engineers could examine how materials fared after more than two years on the Moon.','Parts were returned for study.','Study of dust and exposure effects informed understanding of lunar hardware.','A reported bacteria find on the camera was later widely questioned. Treat it as unverified.']];
+const CON3='Surveyor 3 finished its job, then became a rare chance to study hardware that spent time on the Moon. Parts came home; the rest stays there.';
+let CK=0;const CFS=[[IV3,CON3],[IV,CON]];
+function cfk(k){CK=k;cft.innerHTML=['Case File 001: Surveyor 3','Case File 002: Opportunity'].map((t,j)=>`<button class='chip ${j==k?'on':''}' onclick='cfk(${j})'>${t}</button>`).join('');ivr(0)}
+const H={s1:['A lander: a machine that touches down on another world and stays there.','A television camera, solar panel, battery and landing legs.','Radio sent pictures and data to Earth.','Its images helped judge whether the ground could support a landing.','It showed a soft landing on the Moon was possible and gave Apollo planners early views of the surface.'],s3:['A lander with a camera and a digging scoop.','TV camera, a scoop on an arm, solar panel and battery.','Radio sent pictures and data to Earth.','The scoop dug trenches to test soil strength. Parts returned in 1969 let engineers study how materials aged on the Moon.','It gave a rare chance to examine spacecraft hardware after time on another world.'],a11:['The descent stage is the lower half of the Lunar Module, with landing legs and a descent engine. It stayed behind as the launch platform for the ascent stage.','Landing legs, descent engine and fuel tanks. Experiments left nearby included a laser reflector.','Radio links carried voice and data to Earth.','The crew returned Moon samples. Laser reflectors left on the Moon have been used to measure the Earth-Moon distance.','It showed people could land on another world and return.'],a12:['The lower half of the Lunar Module Intrepid, left on the Moon.','Landing legs and a descent engine. An instrument package with a seismometer was set up nearby.','Radio links carried voice and data to Earth.','The ascent stage was crashed on the Moon on purpose and the seismometer recorded it. The crew also visited Surveyor 3.','Its landing near Surveyor 3 showed a landing could be aimed at a chosen spot.'],pf:['A lander that carried the first Mars rover, protected by a parachute and airbags.','A stereo camera, weather instruments, airbags and the Sojourner rover.','Radio to Earth. Sojourner talked to Earth through the lander.','It sent back images and weather data and supported the rover rock studies.','Its airbag landing was used again by Spirit and Opportunity.'],sj:['A rover: a robotic vehicle that drives across another world to study rocks, soil and surroundings.','Six wheels, cameras, a solar panel and an APXS, an instrument that measures chemical elements in rocks.','Through the Pathfinder lander.','It analyzed rocks and soil and showed a rover could drive on Mars.','Later rover designs built on its success.'],sp:['A rover that explored Gusev Crater.','Panoramic cameras, a robotic arm with a microscope camera and rock grinding tool, spectrometers for rock chemistry and minerals, and solar panels.','Directly with Earth and through Mars orbiters.','It studied rocks and found silica-rich deposits that point to past water-related environments.','It showed rovers can work far longer than planned.'],op:['A rover that explored Meridiani Planum.','Panoramic cameras, a robotic arm with a microscope camera and rock grinding tool, spectrometers, and solar panels.','Directly with Earth and through Mars orbiters.','It found mineral evidence of past liquid water, including small hematite spheres nicknamed blueberries.','It worked about 14 years against a 90-sol plan.'],vk:['A lander with cameras, weather instruments and a soil sampling arm.','Cameras, weather instruments, a soil sampling arm, experiments to test for life, and an RTG power source.','Through the Viking orbiter and directly to Earth.','It sent surface images, weather measurements and results of life-detection experiments. The results were not clear evidence of life.','It was an early attempt to test Mars soil for signs of life from the surface.']};
+function hwb(o){const h=H[o.id];return `<h3>Meet the machine</h3><p>${h[0]}</p><div class='fx'><div><b>Hardware</b>${h[1]}</div><div><b>Talking to Earth</b>${h[2]}</div><div><b>Science it made possible</b>${h[3]}</div></div><details><summary>Learn more: why it mattered</summary><p>${h[4]}</p></details>`}
+function mmr(i){mm.innerHTML=D.map((o,j)=>`<button class='chip ${j==i?'on':''}' onclick='mmr(${j})'>${o.n}</button>`).join('');mx.innerHTML=hwb(D[i])}
+function ivr(i){const IV=CFS[CK][0],CON=CFS[CK][1];ivS.innerHTML=IV.map((s,j)=>`<button class='step ${j==i?'on':''}' onclick='ivr(${j})'>${j+1}. ${s[0]}</button>`).join('');const s=IV[i];ivP.textContent=s[1];ivX.innerHTML=`<div class='fx'><div class='c'><b>Confirmed</b>${s[2]||'None listed'}</div><div class='i'><b>Interpretation</b>${s[3]||'None listed'}</div><div class='u'><b>Unknown / verify</b>${s[4]||'None listed'}</div></div>`+(i==IV.length-1?`<p><b>Investigation conclusion:</b> ${CON}</p>`:'')}
+const Q=[['Which rover was planned to work for about 90 sols?',['Spirit','Opportunity','Sojourner'],1,'Opportunity was planned for 90 sols and worked for about 14 years.'],['Which mission visited Surveyor 3?',['Apollo 11','Apollo 12','Surveyor 1'],1,'Apollo 12 astronauts visited it on Nov 20, 1969.'],['Which was the first wheeled rover to operate on Mars?',['Sojourner','Spirit','Viking 1'],0,'Sojourner rode with Mars Pathfinder in 1997.'],['What did Apollo 12 bring home from Surveyor 3?',['The whole spacecraft','The TV camera, scoop and cable pieces','Nothing'],1,'Parts were recovered; the rest stayed on the Moon.'],['Where did Opportunity land?',['Gusev Crater','Meridiani Planum','Ares Vallis'],1,'Gusev Crater was Spirit, and Ares Vallis was Pathfinder.'],['In which year was Spirit last heard from?',['2004','2010','2018'],1,'Its last contact was on March 22, 2010.']];
+Q.push(['What did the Viking 1 lander carry to look for signs of life?',['Biology experiments','A telescope','A drill rig'],0,'Viking tested Martian soil for signs of life. The results were not clear evidence of life.'],['What is a sol?',['A Martian day','A type of rover','A Moon crater'],0,'A sol is a Martian day, a little longer than an Earth day.']);
+let qi=0,sc=0,qd=false;
+function qr(){if(qi>=Q.length){qz.innerHTML=`<p>Final score: ${sc} / ${Q.length}</p><button class='chip' onclick='qq()'>Try again</button>`;return}const q=Q[qi];qd=false;qz.innerHTML=`<p class='tag'>Question ${qi+1} of ${Q.length} · Score ${sc}</p><p>${q[0]}</p>`+q[1].map((a,j)=>`<button class='chip' style='display:block;margin:6px 0' onclick='qa(${j})'>${a}</button>`).join('')+`<div id='fb'></div>`}
+function qa(j){if(qd)return;qd=true;const q=Q[qi],ok=j==q[2];if(ok)sc++;fb.innerHTML=`<p><b>${ok?'Correct.':'Not quite.'}</b> ${q[3]}</p><button class='btn' onclick='qn()'>Next</button>`}
+function qn(){qi++;qr()}function qq(){qi=0;sc=0;qr()}
+chp(0);mp(0);cfk(0);qr();mmr(0);
+function cmp(){const a=D.find(o=>o.id==c1.value),b=D.find(o=>o.id==c2.value),f=[["Mission","m"],["Destination","d"],["Launch","l"],["Landing","a"],["Region","loc"],["Status","s"],["Purpose","p"]];ct.innerHTML="<table><tr><th></th><th>"+a.n+"</th><th>"+b.n+"</th></tr>"+f.map(x=>"<tr><td>"+x[0]+"</td><td>"+a[x[1]]+"</td><td>"+b[x[1]]+"</td></tr>").join("")+"</table>"}
+[c1,c2].forEach(s=>s.innerHTML=D.map(o=>"<option value='"+o.id+"'>"+o.n+"</option>").join(""));c2.selectedIndex=3;cmp();
+draw();nd();
+(function(){const c=document.getElementById("st"),x=c.getContext("2d");const w=c.width=c.offsetWidth||800,h=c.height=c.offsetHeight||600;x.fillStyle="#fff";for(let i=0;i<120;i++){x.globalAlpha=Math.random()*.7+.2;x.fillRect(Math.random()*w,Math.random()*h,1.2,1.2)}})();
+const AR={
+'THE FORGOTTEN FRONTIER':'الحدود المنسيّة','Explore':'استكشف','Story':'القصة','Machines':'الآلات','Map':'الخريطة','Investigate':'التحقيق','Challenge':'التحدي','Science':'العلم','Learn':'تعلّم','Compare':'قارن','Legacy':'الإرث','Sources':'المصادر',
+'The Forgotten Frontier · Team AKYRA · Explore What We Left Behind.':'الحدود المنسيّة · فريق AKYRA · استكشف ما تركناه خلفنا.',
+'An interactive archive · NASA Space Apps 2026 · Team AKYRA':'أرشيف تفاعلي · ناسا سبيس آبس 2026 · فريق AKYRA',
+'Every Mission':'كل مهمة','Leaves Something Behind.':'تترك شيئاً خلفها.',
+'Spacecraft that landed on the Moon and Mars did not vanish when their missions ended. Open the archive and investigate what was left, what was brought home, and what it taught us.':'المركبات التي هبطت على القمر والمريخ لم تختفِ بانتهاء مهماتها. افتح الأرشيف وتحرَّ ما تُرك، وما عاد إلى الأرض، وما علّمنا إياه.',
+'THE MOON':'القمر','MARS':'المريخ','START EXPLORING':'ابدأ الاستكشاف',
+'“When a space mission ends, its story does not have to end with it.”':'«عندما تنتهي مهمة فضائية، لا يجب أن تنتهي قصتها معها.»',
+'The archive · 9 documented objects':'الأرشيف · 9 أجسام موثّقة','Explore What We Left Behind':'استكشف ما تركناه خلفنا',
+'All':'الكل','Moon':'القمر','Mars':'المريخ','Remains on surface':'باقٍ على السطح','Partly recovered':'استُعيد جزء منه','Mission ended':'انتهت المهمة',
+'No map is shown. Only landing regions that NASA names are given; no coordinates are displayed because none are verified in this dataset.':'لا تُعرض خريطة. تُذكر مناطق الهبوط التي تسمّيها ناسا فقط، ولا تُعرض إحداثيات لأنه لا توجد إحداثيات موثّقة في هذه البيانات.',
+'Surveyor program':'برنامج سيرفيور','Apollo 11':'أبولو 11','Apollo 12':'أبولو 12','Mars Pathfinder':'مارس باثفايندر','Mars Exploration Rover':'مركبتا استكشاف المريخ','Viking':'فايكنغ',
+'Surveyor 1':'سيرفيور 1','Surveyor 3':'سيرفيور 3','Apollo 11 Lunar Module (descent stage)':'مركبة أبولو 11 القمرية (مرحلة الهبوط)','Apollo 12 Lunar Module (descent stage)':'مركبة أبولو 12 القمرية (مرحلة الهبوط)','Mars Pathfinder lander':'هابطة مارس باثفايندر','Sojourner rover':'مركبة سوجورنر','Spirit rover':'مركبة سبيريت','Opportunity rover':'مركبة أوبورتيونيتي','Viking 1 lander':'هابطة فايكنغ 1',
+'Spirit':'سبيريت','Opportunity':'أوبورتيونيتي','Sojourner':'سوجورنر','Viking 1':'فايكنغ 1',
+'Launch':'الإطلاق','Landing':'الهبوط','Region (NASA-named)':'المنطقة (بحسب ناسا)','Status':'الحالة','Original purpose:':'الغرض الأصلي:',
+'Journey':'الرحلة','Discoveries':'الاكتشافات','Mission end':'نهاية المهمة','What remains':'ما تبقّى',
+'Confirmed':'مؤكَّد','Interpretation':'تفسير','Unknown / verify':'غير معروف / يُتحقق منه','None listed':'لا شيء مذكور',
+'Meet the machine':'تعرّف على الآلة','Hardware':'العتاد','Talking to Earth':'التواصل مع الأرض','Science it made possible':'العلم الذي أتاحته','Learn more: why it mattered':'اعرف أكثر: لماذا كانت مهمة',
+'Browse official NASA photographs':'تصفّح صور ناسا الرسمية','Sources:':'المصادر:','Close profile':'إغلاق الملف','NASA image source':'مصدر الصورة في ناسا',
+'Meet the machines':'تعرّف على الآلات','The hardware behind the missions':'العتاد خلف المهمات',
+'A lander touches down and stays put. A rover is a robotic vehicle that drives across another world to study its rocks, soil and surroundings.':'الهابطة تلمس سطح عالم آخر وتبقى فيه. أما المركبة الجوّالة (روفر) فهي مركبة آلية تتحرك على سطح عالم آخر لدراسة صخوره وتربته وبيئته.',
+'Words to know':'كلمات يجب معرفتها','The story':'القصة','Six chapters':'ستة فصول',
+'The Beginning':'البداية','The Mission':'المهمة','The Unexpected':'غير المتوقع','The End':'النهاية','What Remains':'ما تبقّى','The Legacy':'الإرث',
+'Before people went to the Moon, robots went first. Surveyor landers tested soft landings and surveyed the surface ahead of Apollo. Mars is far away, so machines went there first too.':'قبل أن يذهب البشر إلى القمر، ذهبت الروبوتات أولاً. اختبرت هابطات سيرفيور الهبوط الناعم ومسحت السطح قبل أبولو. والمريخ بعيد، فذهبت إليه الآلات أولاً أيضاً.',
+'Each machine had a job: photograph the surface, test the soil, analyze rocks, search for signs of past water or life. Every profile lists its original purpose.':'لكل آلة مهمة: تصوير السطح، واختبار التربة، وتحليل الصخور، والبحث عن علامات الماء أو الحياة في الماضي. ويذكر كل ملف غرضها الأصلي.',
+'Surveyor 3 bounced on landing. Spirit became stuck in soft sand. A global dust storm struck Opportunity in 2018.':'ارتدّت سيرفيور 3 عند الهبوط. وعلقت سبيريت في رمال ناعمة. وضربت عاصفة غبار عالمية أوبورتيونيتي عام 2018.',
+'Missions ended in different ways: lost contact, sand traps, dust, or a planned departure. Each profile gives its own ending.':'انتهت المهمات بطرق مختلفة: انقطاع الاتصال، أو فخاخ الرمال، أو الغبار، أو مغادرة مخططة. ويذكر كل ملف نهايته.',
+'Apollo descent stages, Surveyor spacecraft, landers and rovers remain where they stopped. Only parts of Surveyor 3 came home.':'مراحل هبوط أبولو ومركبات سيرفيور والهابطات والمركبات الجوّالة باقية حيث توقفت. وعادت أجزاء فقط من سيرفيور 3 إلى الأرض.',
+'Surveyor, Viking, Pathfinder and the rovers tested landing, mobility and long-term operation, which later missions built on.':'اختبرت سيرفيور وفايكنغ وباثفايندر والمركبات الجوّالة الهبوط والتنقل والتشغيل الطويل، وبنت عليها المهمات اللاحقة.',
+'The science behind what remains':'العلم خلف ما تبقّى','Why old hardware still matters':'لماذا لا يزال العتاد القديم مهماً',
+'Temperature extremes':'تطرّف الحرارة','Radiation':'الإشعاع','Dust':'الغبار','Material degradation':'تدهور المواد',
+'Educational':'تعليمي','Moon vs Mars':'القمر مقابل المريخ','How earlier missions helped':'كيف ساعدت المهمات السابقة','Did you know?':'هل تعلم؟','Another fact':'معلومة أخرى',
+'Opportunity was planned for 90 sols and operated for more than 50 times that.':'كان من المخطط أن تعمل أوبورتيونيتي 90 سولاً، لكنها عملت أكثر من 50 ضعف ذلك.',
+'Apollo 12 landed within walking distance of Surveyor 3.':'هبطت أبولو 12 على مسافة يمكن قطعها سيراً من سيرفيور 3.',
+'Sojourner was the first wheeled rover to operate on Mars.':'كانت سوجورنر أول مركبة بعجلات تعمل على المريخ.',
+'Only parts of Surveyor 3 came home; the rest of it is still on the Moon.':'عادت أجزاء فقط من سيرفيور 3 إلى الأرض، والباقي لا يزال على القمر.',
+'Two objects, side by side':'جسمان جنباً إلى جنب',
+'Where we left them':'حيث تركناهم','Landing regions':'مناطق الهبوط','Regional location':'موقع إقليمي',
+'Oceanus Procellarum (Ocean of Storms)':'محيط العواصف (Oceanus Procellarum)','Mare Tranquillitatis (Sea of Tranquility)':'بحر الهدوء (Mare Tranquillitatis)','Ares Vallis':'وادي آريس (Ares Vallis)','Gusev Crater':'فوهة غوسيف','Meridiani Planum':'سهل ميريديياني (Meridiani Planum)','Chryse Planitia':'سهل كريزي (Chryse Planitia)',
+'Regions are the places NASA names for each landing. No coordinates are shown because none are verified here, and this is not a scale map. Tap an object to open its profile.':'المناطق هي الأماكن التي تسمّيها ناسا لكل هبوط. لا تُعرض إحداثيات لأنها غير موثّقة هنا، وهذه ليست خريطة بمقياس رسم. اضغط على جسم لفتح ملفه.',
+'Mission investigation':'تحقيق في المهمة','Mission Case Files':'ملفات المهمات','Case File 001: Surveyor 3':'الملف 001: سيرفيور 3','Case File 002: Opportunity':'الملف 002: أوبورتيونيتي','Investigation conclusion:':'خلاصة التحقيق:',
+'Test Your Space Knowledge':'اختبر معلوماتك الفضائية','Correct.':'صحيح.','Not quite.':'ليس تماماً.','Next':'التالي','Try again':'حاول مرة أخرى',
+'Which rover was planned to work for about 90 sols?':'أي مركبة جوّالة كان مخططاً أن تعمل نحو 90 سولاً؟','Opportunity was planned for 90 sols and worked for about 14 years.':'خُطط لأوبورتيونيتي 90 سولاً، لكنها عملت نحو 14 عاماً.',
+'Which mission visited Surveyor 3?':'أي مهمة زارت سيرفيور 3؟','Apollo 12 astronauts visited it on Nov 20, 1969.':'زارها رواد أبولو 12 في 20 نوفمبر 1969.',
+'Which was the first wheeled rover to operate on Mars?':'ما أول مركبة بعجلات عملت على المريخ؟','Sojourner rode with Mars Pathfinder in 1997.':'وصلت سوجورنر مع مارس باثفايندر عام 1997.',
+'What did Apollo 12 bring home from Surveyor 3?':'ماذا أعادت أبولو 12 من سيرفيور 3؟','The whole spacecraft':'المركبة كاملة','The TV camera, scoop and cable pieces':'كاميرا التلفزيون والمِغرفة وقطع من الكابلات','Nothing':'لا شيء','Parts were recovered; the rest stayed on the Moon.':'استُعيدت أجزاء، وبقي الباقي على القمر.',
+'Where did Opportunity land?':'أين هبطت أوبورتيونيتي؟','Gusev Crater was Spirit, and Ares Vallis was Pathfinder.':'فوهة غوسيف كانت لسبيريت، ووادي آريس لباثفايندر.',
+'In which year was Spirit last heard from?':'في أي عام انقطع الاتصال بسبيريت آخر مرة؟','Its last contact was on March 22, 2010.':'كان آخر اتصال بها في 22 مارس 2010.',
+'What did the Viking 1 lander carry to look for signs of life?':'ماذا حملت هابطة فايكنغ 1 للبحث عن علامات الحياة؟','Biology experiments':'تجارب بيولوجية','A telescope':'تلسكوباً','A drill rig':'جهاز حفر','Viking tested Martian soil for signs of life. The results were not clear evidence of life.':'اختبرت فايكنغ تربة المريخ بحثاً عن علامات الحياة، ولم تكن النتائج دليلاً واضحاً على الحياة.',
+'What is a sol?':'ما السول؟','A Martian day':'يوم مريخي','A type of rover':'نوع من المركبات الجوّالة','A Moon crater':'فوهة على القمر','A sol is a Martian day, a little longer than an Earth day.':'السول يوم مريخي، أطول قليلاً من يوم الأرض.',
+'What these machines taught humanity':'ماذا علّمتنا هذه الآلات',
+'Lunar exploration':'استكشاف القمر','Surveyor landers tested soft landings and the surface before Apollo crews went.':'اختبرت هابطات سيرفيور الهبوط الناعم وسطح القمر قبل ذهاب أطقم أبولو.',
+'Robotic exploration':'الاستكشاف الآلي','Sojourner showed a rover could drive on Mars; Spirit and Opportunity then worked far beyond their plans.':'أثبتت سوجورنر أن المركبة الجوّالة تستطيع السير على المريخ، ثم عملت سبيريت وأوبورتيونيتي أبعد بكثير مما خُطط لهما.',
+'Planetary geology':'جيولوجيا الكواكب','Rovers read the history of a place from its rocks and minerals.':'تقرأ المركبات الجوّالة تاريخ المكان من صخوره ومعادنه.',
+'Past water':'الماء في الماضي','Spirit and Opportunity found evidence of water-related environments on ancient Mars.':'وجدت سبيريت وأوبورتيونيتي أدلة على بيئات مرتبطة بالماء في المريخ القديم.',
+'Engineering':'الهندسة','Dust, cold and power shortages shaped how later spacecraft were designed.':'أثّر الغبار والبرد ونقص الطاقة في تصميم المركبات اللاحقة.',
+'Later missions':'مهمات لاحقة','The airbag landing system proven by Pathfinder was used again by Spirit and Opportunity.':'استُخدم نظام الهبوط بالوسائد الهوائية الذي أثبتته باثفايندر مرة أخرى في سبيريت وأوبورتيونيتي.',
+'The next generation of explorers':'الجيل القادم من المستكشفين','What the machines left us':'ما تركته لنا الآلات',
+'Surveyor 3 parts brought home in 1969 let engineers study how hardware ages on the Moon. Rovers that outlasted their plans, and a mission that ended in dust, show how dust, power and long operation shape spacecraft design. Leaving equipment on other worlds also raises a question of responsibility: these sites are part of human history, and how to protect them is an open discussion.':'أتاحت أجزاء سيرفيور 3 التي عادت عام 1969 للمهندسين دراسة كيف يتقادم العتاد على القمر. وتُظهر المركبات التي فاقت عمرها المخطط، وبعثة انتهت بالغبار، كيف يؤثر الغبار والطاقة والتشغيل الطويل في تصميم المركبات. كما يثير ترك المعدات على عوالم أخرى سؤال المسؤولية: فهذه المواقع جزء من تاريخ البشرية، وكيفية حمايتها نقاش مفتوح.',
+'We left machines behind. They left knowledge for us.':'تركنا الآلات خلفنا، وتركت لنا المعرفة.',
+'References and data sources':'المراجع ومصادر البيانات','Where the facts come from':'من أين جاءت الحقائق'
+};
+const RX=[[/^(\d+)\. (.+)$/,m=>m[1]+'. '+(AR[m[2]]||m[2])],[/^Question (\d+) of (\d+) · Score (\d+)$/,m=>'السؤال '+m[1]+' من '+m[2]+' · النتيجة '+m[3]],[/^Final score: (\d+) \/ (\d+)$/,m=>'النتيجة النهائية: '+m[1]+' / '+m[2]],[/^Credit: (.+)\.$/,m=>'المصدر: '+m[1]+'.']];
+let L='en',pend=false;
+function trs(s){const t=s.trim();if(!t)return s;let r=AR[t];if(!r){for(const x of RX){const m=t.match(x[0]);if(m){r=x[1](m);break}}}if(!r&&t.indexOf(' · ')>0){const a=t.split(' · '),b=a.map(v=>AR[v]||v);if(b.join()!==a.join())r=b.join(' · ')}return r?s.replace(t,()=>r):s}
+function tr(){const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode()){const p=n.parentNode;if(!p||p.nodeName=='SCRIPT'||p.nodeName=='STYLE'||p.id=='lg')continue;if(n.__o===undefined)n.__o=n.nodeValue;const v=L=='ar'?trs(n.__o):n.__o;if(n.nodeValue!==v)n.nodeValue=v}}
+function setLang(){L=L=='en'?'ar':'en';const h=document.documentElement;h.lang=L;h.dir=L=='ar'?'rtl':'ltr';lg.textContent=L=='ar'?'English':'العربية';q.placeholder=L=='ar'?'ابحث عن أجسام أو مهمات أو أماكن…':'Search objects, missions, places…';tr()}
+new MutationObserver(()=>{if(L=='ar'&&!pend){pend=true;requestAnimationFrame(()=>{pend=false;tr()})}}).observe(document.body,{childList:true,subtree:true});
+</script></body></html>
